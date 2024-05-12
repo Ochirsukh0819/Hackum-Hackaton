@@ -4,11 +4,13 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useUser } from "@/context/testContext";
 useUser;
+import { useRouter, usePathname } from "next/navigation";
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
+  const pathName = usePathname();
   const { logout, user } = useUser();
   return (
     <Disclosure as="nav" className="bg-white shadow">
@@ -43,7 +45,7 @@ export default function Navbar() {
                   <a
                     href="/"
                     className={`inline-flex items-center border-b-2 ${
-                      window.location.pathname === "/"
+                      pathName === "/"
                         ? "border-indigo-500 text-indigo-500"
                         : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                     } px-1 pt-1 text-sm font-medium`}
@@ -53,7 +55,7 @@ export default function Navbar() {
                   <a
                     href={user?.token ? "/myCourse" : "/login"}
                     className={`inline-flex items-center border-b-2 ${
-                      window.location.pathname === "/myCourses"
+                      pathName === "/myCourses"
                         ? "border-indigo-500 text-indigo-500"
                         : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                     } px-1 pt-1 text-sm font-medium`}
@@ -139,7 +141,7 @@ export default function Navbar() {
                 as="a"
                 href="/home"
                 className={`block border-l-4 border-indigo-500 ${
-                  window.location.pathname === "/home"
+                  pathName === "/"
                     ? "border-indigo-500 text-indigo-500"
                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 }
@@ -152,7 +154,7 @@ export default function Navbar() {
                 as="a"
                 href="/myCources"
                 className={`block border-l-4 border-transparent ${
-                  window.location.pathname === "/myCources"
+                  pathName === "/myCources"
                     ? "border-indigo-500 text-indigo-500"
                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 }
