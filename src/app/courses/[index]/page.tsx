@@ -3,13 +3,12 @@ import { TabsDemo } from "@/components/Tab";
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { coursesJson } from "@/lib/utils";
+import Navbar from "@/components/Navbar";
 
 function Courses() {
   const [courseData, setCourseData] = useState<any>([]);
   const params = useParams<{ index: string }>();
   const [loading, setLoading] = useState<boolean>(true);
-
-  console.log("params: ", params.index);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,50 +33,51 @@ function Courses() {
     return <section>loading ...</section>;
   }
 
-  console.log("data: ", courseData[0].зорилго);
+  console.log("data: ", courseData[0].Зорилго);
   return (
-    <section className="w-full flex gap-20 px-24 mt-10">
-      <section className="flex flex-col gap-2 w-[50%]">
-        <h2 className="font-bold text-2xl">
-          {courseData[0].Монгол_нэр}
-          <span>({courseData[0].Хичээлийн_индекс})</span>
-        </h2>
-        <div className="">
-          <p>Зорилго:</p>
-          {courseData[0].зорилго !== null ? (
-            <p>{courseData[0].зорилго}</p>
-          ) : (
-            <p>Мэдээлэл байхгүй</p>
-          )}
-        </div>
-        <div>
-          <p>Агуулга:</p>
-          <p>
-            "Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-            eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
-            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-            sed quia non numquam eius modi tempora incidunt ut labore et dolore
-            magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-            nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
-            aliquid ex ea commodi consequatur? Quis autem vel eum iure
-            reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-            consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
-            pariatur?"
-          </p>
-        </div>
-        <div className="flex">
-          {" "}
-          багц цаг: 2 | Улирал: Хаврын улирал | Түвшин: Бакалавр | бүрэлдэхүүн:
-          Семниар
-        </div>
-        <div>Багш: Үйтүмэн</div>
-      </section>
-      <section className="w-[50%]">
-        <TabsDemo />
+    <section className="flex flex-col w-full ">
+      <Navbar />
+      <section className="w-full flex items-center justify-center gap-10 px-6 mt-10 h-max">
+        <section className="w-full lg:w-1/2 bg-white rounded-lg shadow-lg p-6">
+          <h2 className="font-bold text-3xl mb-4">
+            {courseData[0].Монгол_нэр}
+            <span className="text-gray-600 text-lg">
+              ({courseData[0].Хичээлийн_индекс})
+            </span>
+          </h2>
+          <div className="text-sm text-gray-600">
+            <span className="font-semibold">Багц цаг: </span>{" "}
+            {courseData[0].Багц_цаг} |{" "}
+            <span className="font-semibold">Улирал: </span>{" "}
+            {courseData[0].Орох_улирал}|{" "}
+            <span className="font-semibold">Түвшин: </span>{" "}
+            {courseData[0].Сургалтын_түвшин} |
+          </div>
+          <div className="mb-6 flex gap-2 mt-4">
+            <p className="font-semibold">Зорилго:</p>
+            <p className="text-gray-800">
+              {courseData[0].Зорилго !== null
+                ? courseData[0].Зорилго
+                : "Мэдээлэл байхгүй"}
+            </p>
+          </div>
+          <div className="mb-6">
+            <p className="font-semibold">Агуулга:</p>
+            <p className="text-gray-800">
+              чиглүүлэгтэй сурах (үүсгүүр\дискриминатив сурах,
+              параметрт\параметргүй сурах, мэдрэс сүлжээ, тулгуур вектор машин);
+              чиглүүлэггүй сурах (аймаглах, хэмжээс бууруулах, кернелийн
+              аргууд); сурах онол (bias/variance харьцаа, VC онол, их маржин);
+              тулгах сургалт болон адаптив удирдлага гм. Мөн машин сургалтын
+              орчин үеийн хэрэглээ болох робот удирдлага, өгөгдлийн уурхай,
+              автомат чиглүүлэл, биоинформатик, яриа танилт, бичвэр болон вэб
+              өгөгдөл боловсруулалт зэргийг үзнэ.
+            </p>
+          </div>
+        </section>
+        <section className="w-full lg:w-1/2 h-max">
+          <TabsDemo />
+        </section>
       </section>
     </section>
   );

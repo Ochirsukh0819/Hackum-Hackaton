@@ -1,4 +1,16 @@
 import { LoginInput, RegisterInput, User } from "./type";
+import axios from "axios";
+import { app } from "./firebaseConfig";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  getIdToken,
+  sendPasswordResetEmail,
+} from "firebase/auth";
+
+const DIPLOMA_API_URL = "http://localhost:8080";
+const ML_NLP = "http://172.104.34.197/nlp-web-demo/tts";
+const auth = getAuth(app);
 
 export function getUser(): User | null {
   const user = localStorage.getItem("user");
@@ -37,46 +49,49 @@ export async function registerUser({
   password,
   studentId,
 }: RegisterInput): Promise<any> {
-  //   try {
-  //     const response = await axios.post(
-  //       `${DIPLOMA_API_URL}/createUser`,
-  //       {
-  //         email: email,
-  //         password: password,
-  //         userName: userName,
-  //         customClaims: { studentId: studentId },
-  //       },
-  //       {
-  //         headers: {
-  //           "Access-Control-Allow-Origin": "*",
-  //         },
-  //       }
-  //     );
-  //     return response.data;
-  //   } catch (error: any) {
-  //     console.error(error);
-  //     return error.response.data;
-  //   }
+  try {
+    const response = await axios.post(
+      `${DIPLOMA_API_URL}/createUser`,
+      {
+        email: email,
+        password: password,
+        userName: userName,
+        customClaims: { studentId: studentId },
+      },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
+    return response.data;
+  } catch (error: any) {
+    console.error(error);
+    return error.response.data;
+  }
 }
 
 export async function login({ email, password }: LoginInput) {
-  // try {
-  //   const userCredential = await signInWithEmailAndPassword(
-  //     auth,
-  //     email,
-  //     password
-  //   );
-  //   const userToken = await getIdToken(userCredential.user);
-  //   return userToken;
-  // } catch (error) {
-  //   if (axios.isAxiosError(error)) {
-  //     if (error.response?.status === 400) {
-  //       return "error";
-  //     }
-  //     return error.response?.data?.message || "error";
-  //   }
-  //   return "error";
-  // }
+  console.log(email);
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    console.log("user: ", userCredential);
+    const userToken = await getIdToken(userCredential.user);
+    console.log("userToken: ", userToken);
+    return userToken;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 400) {
+        return "error";
+      }
+      return error.response?.data?.message || "error";
+    }
+    return "error";
+  }
 }
 
 export function decodeJwt(token: string) {

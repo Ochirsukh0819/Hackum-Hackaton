@@ -2,12 +2,14 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-
+import { useUser } from "@/context/testContext";
+useUser;
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
+  const { logout, user } = useUser();
   return (
     <Disclosure as="nav" className="bg-white shadow">
       {({ open }) => (
@@ -28,37 +30,35 @@ export default function Navbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt="Your Company"
-                  />
+                  <a href="/">
+                    <img
+                      className="h-8 w-auto"
+                      src="/logo.png"
+                      alt="Your Company"
+                    />
+                  </a>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
+                    href="/"
+                    className={`inline-flex items-center border-b-2 ${
+                      window.location.pathname === "/"
+                        ? "border-indigo-500 text-indigo-500"
+                        : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                    } px-1 pt-1 text-sm font-medium`}
                   >
-                    Dashboard
+                    Нүүр хуудас
                   </a>
                   <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                    href={user?.token ? "/myCourse" : "/login"}
+                    className={`inline-flex items-center border-b-2 ${
+                      window.location.pathname === "/myCourses"
+                        ? "border-indigo-500 text-indigo-500"
+                        : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                    } px-1 pt-1 text-sm font-medium`}
                   >
-                    Team
-                  </a>
-                  <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  >
-                    Projects
-                  </a>
-                  <a
-                    href="#"
-                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  >
-                    Calendar
+                    Миний хичээл
                   </a>
                 </div>
               </div>
@@ -80,7 +80,7 @@ export default function Navbar() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="\profile.png"
                         alt=""
                       />
                     </Menu.Button>
@@ -98,16 +98,17 @@ export default function Navbar() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/upload"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Your Profile
+                            Миний профайл
                           </a>
                         )}
                       </Menu.Item>
+
                       <Menu.Item>
                         {({ active }) => (
                           <a
@@ -116,21 +117,11 @@ export default function Navbar() {
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
+                            onClick={() => {
+                              logout();
+                            }}
                           >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Sign out
+                            Гарах
                           </a>
                         )}
                       </Menu.Item>
@@ -146,31 +137,29 @@ export default function Navbar() {
               {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
               <Disclosure.Button
                 as="a"
-                href="#"
-                className="block border-l-4 border-indigo-500 bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium text-indigo-700"
+                href="/home"
+                className={`block border-l-4 border-indigo-500 ${
+                  window.location.pathname === "/home"
+                    ? "border-indigo-500 text-indigo-500"
+                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                }
+                bg-indigo-50 py-2 pl-3 pr-4 text-base font-medium 
+                text-indigo-700`}
               >
-                Dashboard
+                Нүүр Хуудас
               </Disclosure.Button>
               <Disclosure.Button
                 as="a"
-                href="#"
-                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                href="/myCources"
+                className={`block border-l-4 border-transparent ${
+                  window.location.pathname === "/myCources"
+                    ? "border-indigo-500 text-indigo-500"
+                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                }
+                py-2 pl-3 pr-4 text-base font-medium text-gray-500 
+                hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700`}
               >
-                Team
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
-              >
-                Projects
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                href="#"
-                className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
-              >
-                Calendar
+                Миний Хичээл
               </Disclosure.Button>
             </div>
           </Disclosure.Panel>

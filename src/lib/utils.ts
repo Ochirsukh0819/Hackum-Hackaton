@@ -12,6 +12,77 @@ export function truncateText(text: string, maxLength: number) {
   }
   return text;
 }
+export const quiz = {
+  totalQuestions: 5,
+  questions: [
+    {
+      id: 1,
+      question:
+        "Ачааны тэрэг цагт 80 км/цаг хурдтай явж  байна. 30 минут өнгөрсний дараа ачааны тэрэг ямар зам туулсан байх вэ?",
+      answers: ["80km/h", "240km/h", "40km/h", "30km/h"],
+      correctAnswer: "40km/h",
+    },
+    {
+      id: 2,
+      question:
+        "Захиалагч ямар тохиолдолд гүйцэтгэлийн баталгаа шаардахгүй байж болох вэ?",
+      answers: [
+        "2 тэрбум төгрөгийн төсөвт өртөгтэй ажил",
+        "800 сая төгрөгийн бараа худалдан авах",
+        "1,5 жилийн хугацаатай үргэжлэх гэрээний үед",
+        "5 жилийн хугацаатай үргэжлэх гэрээний үед",
+      ],
+      correctAnswer: "1,5 жилийн хугацаатай үргэжлэх гэрээний үед",
+    },
+    {
+      id: 3,
+      question: "Монгол улсын ерөнхийлөгч хэн бэ?",
+      answers: ["Хүрэлсүх", "Баттулга", "Элбэгдорж", "Хэн нэгэн"],
+      correctAnswer: "Хүрэлсүх",
+    },
+    {
+      id: 4,
+      question: "OOP гэж юу гэсэн үгний товчлол вэ?",
+      answers: [
+        "Object Odd Programming",
+        "Odd Oddly Programming",
+        "Object Oriented Programming",
+        "OOP",
+      ],
+      correctAnswer: "Object Oriented Programming",
+    },
+    {
+      id: 5,
+      question: "“Гар” хэмээх үгийн хүндэтгэлийн утгыг сонгоно уу?",
+      answers: ["Сарвуу", "Мутар", "Алга", "Хоншоор"],
+      correctAnswer: "Мутар",
+    },
+  ],
+};
+
+// saveCourses: [
+//   "Веб аппликейшн",
+//   "Програмчлалын Си хэл",
+//   "Хиймэл оюун ба машин сургалт",
+// ],
+
+export const myCourse = [
+  {
+    id: "1",
+    courseId: "1227f1221621bd026563d53b9cc7d864",
+    courseName: "Металл ашигт малтмал",
+  },
+  {
+    id: "2",
+    courseId: "426106636e7e1e2790587b847c01e3a4",
+    courseName: "Уурхайн аюулгүй ажиллагаа",
+  },
+  {
+    id: "3",
+    courseId: "c9d52305c7de48273c3a74d8a4e891ff",
+    courseName: "Орос хэл",
+  },
+];
 
 export const coursesJson = [
   {

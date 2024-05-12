@@ -12,6 +12,7 @@ import Button from "../Button";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import LectureTab from "../LectureTab";
+import { QuizDialog } from "../QuizDialog";
 
 export function TabsDemo() {
   return (
@@ -40,16 +41,12 @@ export function TabsDemo() {
       <TabsContent value="password">
         <Card>
           <CardHeader>
-            <CardTitle>Password</CardTitle>
-            <CardDescription>
-              Change your password here. After saving, you'll be logged out.
-            </CardDescription>
+            <CardTitle> QUIZ</CardTitle>
+            <CardDescription>Веб програмчлалын лекцийн QUIZ</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <div>hahkdskgdakhadghdgahklshkga</div>
-          </CardContent>
+          <CardContent className="space-y-2"></CardContent>
           <CardFooter>
-            <Button buttonType="submit" buttonName="Нэвтрэх" />
+            <QuizDialog />
           </CardFooter>
         </Card>
       </TabsContent>

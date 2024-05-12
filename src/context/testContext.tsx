@@ -45,21 +45,21 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
   const login = async (email: string, password: string) => {
     const res = await apiLogin({ email, password } as LoginInput);
 
-    // if (res === "error") return "invalid";
+    if (res === "error") return "invalid";
 
-    // const token = res;
-    // localStorage.setItem("token", token);
-    // const decoded = decodeJwt(token) as any;
+    const token = res;
+    localStorage.setItem("token", token);
+    const decoded = decodeJwt(token) as any;
 
-    // setUser({
-    //   uid: decoded["user_id"],
-    //   email: decoded["email"],
-    //   token: token,
-    //   userType: decoded["role"],
-    //   studentId: decoded["studentId"],
-    //   userName: decoded["name"],
-    //   tokenExpiration: decoded["exp"] || 0,
-    // });
+    setUser({
+      uid: decoded["user_id"],
+      email: decoded["email"],
+      token: token,
+      userType: decoded["role"],
+      studentId: decoded["studentId"],
+      userName: decoded["name"],
+      tokenExpiration: decoded["exp"] || 0,
+    });
 
     router.push("/");
     return "";

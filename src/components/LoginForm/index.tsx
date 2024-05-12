@@ -29,18 +29,16 @@ function LoginForm() {
                 className="space-y-6"
                 onSubmit={async (e) => {
                   e.preventDefault();
-                  toast.success("Амжилттай нэвтэрлээ");
-                  //   setIsLoading(true);
+                  setIsLoading(true);
 
-                  //   const res = await login(email, password);
+                  const res = await login(email, password);
 
-                  //   if (res === "invalid") {
-                  //     toast.error("Хэрэглэгчийн нэр эсвэл нууц үг буруу байна");
-                  //   } else {
-                  //     toast.success("Амжилттай нэвтэрлээ");
-                  //   }
-                  //   setIsLoading(false);
-                  // }}
+                  if (res === "invalid") {
+                    toast.error("Хэрэглэгчийн нэр эсвэл нууц үг буруу байна");
+                  } else {
+                    toast.success("Амжилттай нэвтэрлээ");
+                  }
+                  setIsLoading(false);
                 }}
               >
                 <Input
@@ -62,6 +60,16 @@ function LoginForm() {
                   loading={isLoading}
                 />
               </form>
+              <div className="flex gap-2 items-center mt-4 justify-center">
+                <p className="text-[#484b4f] text-[13px]">
+                  Нууц үгээ мартсан уу?
+                </p>
+                <Link href="/newpassword">
+                  <div className="text-indigo-600 text-[15px]">
+                    Нууц үг сэргээх
+                  </div>
+                </Link>
+              </div>
 
               <div className="flex gap-2 items-center mt-4 justify-center">
                 <p className="text-[#484b4f] text-sm">Бүртгэлгүй юу?</p>

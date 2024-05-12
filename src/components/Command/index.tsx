@@ -31,8 +31,6 @@ export function CommandDemo() {
     fetchData();
   }, []);
 
-  console.log("yachu: ", creationData);
-
   const filteredId =
     query === ""
       ? []
@@ -43,7 +41,7 @@ export function CommandDemo() {
   return (
     <Command className="rounded-lg border shadow-md">
       <CommandInput
-        placeholder=" Оюутны дугаар / Оюутны нэрээр хайх"
+        placeholder=" Хичээлийн нэрээр хайх"
         onChangeCapture={(e: any) => {
           setQuery(e.target.value);
         }}
