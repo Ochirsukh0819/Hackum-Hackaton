@@ -14,12 +14,20 @@ import { Button } from "@mui/material";
 
 export function CarouselSpacing() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
   const handleFileChange = (event?: ChangeEvent<HTMLInputElement>) => {
-    const file: any = event.target.files[0];
-    setSelectedFile(file);
-    console.log(file);
+    if (event && event.target && event.target.files) {
+      const file: File | null = event.target.files[0];
+      if (file) {
+        setSelectedFile(file);
+        console.log(file);
+      } else {
+        console.error("No file selected.");
+      }
+    } else {
+      console.error("No event or files found.");
+    }
   };
+
   return (
     <div className="w-[520px] flex ml-10 flex-col">
       <div className="flex flex-col">
